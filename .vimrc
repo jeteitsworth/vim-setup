@@ -9,15 +9,17 @@ set expandtab
 set backspace=start
 set nobackup
 set nowritebackup
+set linebreak
 
 "Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'k4yt3x/ayu-vim-darker'
-    Plug 'JafarDakhan/vim-gml'
-    Plug 'natebosch/vim-lsc'
-    Plug 'vim-scripts/VimCompletesMe'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
     " IA Writer Plugins
     Plug 'junegunn/goyo.vim'
@@ -42,29 +44,4 @@ nnoremap <C-k> :cnext<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
 
-"LSC Config
 
-let g:lsc_server_commands = {
- \  'lua': {
- \    'command': 'lua-language-server',
- \    'log_level': -1,
- \    'suppress_stderr': v:true,
- \  },
- \  'python': {
- \    'command': 'pylsp',
- \    'log_level': -1,
- \    'suppress_stderr': v:true,
- \  }
- \}
-let g:lsc_auto_map = {
- \  'GoToDefinition': 'gd',
- \  'FindReferences': 'gr',
- \  'Rename': 'gR',
- \  'ShowHover': 'K',
- \  'FindCodeActions': 'ga',
- \  'Completion': 'omnifunc',
- \}
-let g:lsc_enable_autocomplete  = v:true
-let g:lsc_enable_diagnostics   = v:false
-let g:lsc_reference_highlights = v:false
-let g:lsc_trace_level          = 'off'
