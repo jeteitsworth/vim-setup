@@ -3,7 +3,6 @@ set scrolloff=11
 set belloff=all
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set expandtab
 set backspace=start
 set nobackup
 set nowritebackup
@@ -23,6 +22,10 @@ call plug#begin('~/.vim/plugged')
     "Org plugins
     Plug 'nvim-orgmode/orgmode'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'akinsho/org-bullets.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+    Plug 'nvim-orgmode/telescope-orgmode.nvim'
 call plug#end()
 
 set termguicolors
@@ -36,6 +39,7 @@ nnoremap <leader>pv :Vex<CR>
 nnoremap <leader><CR> :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
+nnoremap <leader>as :Telescope orgmode search_headings<CR>
 
 " Org setup
 lua << EOF
@@ -43,4 +47,14 @@ require('orgmode').setup({
 org_agenda_files = '~/Dropbox/org/**/*',
 org_default_notes_file = '~/Dropbox/org/refile.org',
 })
+EOF
+
+" Setup Org Bullets
+lua << EOF
+require('org-bullets').setup()
+EOF
+
+" Setup Org Telescope
+lua << EOF
+require('telescope').load_extension('orgmode')
 EOF
