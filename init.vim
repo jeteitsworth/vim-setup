@@ -1,8 +1,6 @@
 set encoding=utf-8
 set scrolloff=11
 set belloff=all
-set number
-set relativenumber
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -13,16 +11,16 @@ set linebreak
 
 "Plugins
 call plug#begin('~/.vim/plugged')
-    " Theme
+    "Theme
     Plug 'k4yt3x/ayu-vim-darker'
 
-    " IA Writer Pluginks
+    "IA Writer Plugins
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'subnut/vim-iawriter'
 
-    " Org plugins
+    "Org plugins
     Plug 'nvim-orgmode/orgmode'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
@@ -35,7 +33,7 @@ let mapleader = " "
 "Remaps
 
 nnoremap <leader>pv :Vex<CR>
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader><CR> :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
 
