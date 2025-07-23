@@ -13,19 +13,18 @@ set linebreak
 
 "Plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
+    " Theme
     Plug 'k4yt3x/ayu-vim-darker'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-    " IA Writer Plugins
+    " IA Writer Pluginks
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'subnut/vim-iawriter'
+
+    " Org plugins
+    Plug 'nvim-orgmode/orgmode'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 set termguicolors
@@ -36,12 +35,14 @@ let mapleader = " "
 "Remaps
 
 nnoremap <leader>pv :Vex<CR>
-nnoremap <leader><CR> :so ~/.vimrc<CR>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <leader>pf :Files<CR>
-nnoremap <C-j> :cprev<CR>
-nnoremap <C-k> :cnext<CR>
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
 
-
+" Org setup
+lua << EOF
+require('orgmode').setup({
+org_agenda_files = '~/Dropbox/org/**/*',
+org_default_notes_file = '~/Dropbox/org/refile.org',
+})
+EOF

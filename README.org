@@ -1,0 +1,13 @@
+* Vim Setup 2025
+
+** Neovim
+I moved to neovim so I can use [[https://github.com/nvim-orgmode][nvim-orgmode]].
+
+** Dependencies
+- C-compiler (for treesitter)
+- [[https://github.com/junegun/vim-plug][vimplug]]
+
+** Setup
+1. Move or link init.vim to .config/nvim
+2. Install Vim Plug
+3. Run PlugInstall in neovim
