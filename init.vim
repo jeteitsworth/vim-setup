@@ -26,6 +26,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
     Plug 'nvim-orgmode/telescope-orgmode.nvim'
+
+	"Vim wiki
+	Plug 'vimwiki/vimwiki'
 call plug#end()
 
 set termguicolors
@@ -58,3 +61,7 @@ EOF
 lua << EOF
 require('telescope').load_extension('orgmode')
 EOF
+
+" Setup Vimwiki
+let g:vimwiki_list = [{'path': '~/novel-2/wiki/', 'path_html': '~/novel-2/wiki_html/'}]
+
