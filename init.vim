@@ -3,10 +3,12 @@ set scrolloff=11
 set belloff=all
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set backspace=start
+set backspace=indent,eol,start
 set nobackup
 set nowritebackup
 set linebreak
+set autowriteall
+set history=100
 
 "Plugins
 call plug#begin('~/.vim/plugged')
@@ -18,6 +20,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/limelight.vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'subnut/vim-iawriter'
+	Plug 'preservim/vim-pencil'
 
     "Org plugins
     Plug 'nvim-orgmode/orgmode'
@@ -43,6 +46,12 @@ nnoremap <leader><CR> :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
 nnoremap <leader>as :Telescope orgmode search_headings<CR>
+nnoremap <leader>sc :set spell! spelllang=en_us<CR>
+
+inoremap . .<c-g>u
+inoremap ? ?<c-g>u
+inoremap ! !<c-g>u
+inoremap , ,<c-g>u
 
 " Org setup
 lua << EOF
@@ -65,3 +74,10 @@ EOF
 " Setup Vimwiki
 let g:vimwiki_list = [{'path': '~/novel-2/wiki/', 'path_html': '~/novel-2/wiki_html/'}]
 
+" Pencil
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd    call pencil#init()
+  autocmd FileType text            call pencil#init()
+  autocmd FileType org             call pencil#init()
+augroup END
