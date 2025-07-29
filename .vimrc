@@ -1,40 +1,34 @@
+set nocompatible
+filetype plugin on
+
 set encoding=utf-8
-set scrolloff=11
 set belloff=all
-set tabstop=4 softtabstop=4
 set shiftwidth=4
-set expandtab
-set backspace=start
+set tabstop=4 softtabstop=4
+set backspace=indent,eol,start
 set nobackup
-set nowritebackup
-set linebreak
+
+"Install Plug
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 "Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'k4yt3x/ayu-vim-darker'
+    Plug 'vimwiki/vimwiki'
 
-    " IA Writer Plugins
+    " Prose Plugins
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'subnut/vim-iawriter'
     Plug 'preservim/vim-pencil'
-    Plug 'preservim/vim-lexical'
-    Plug 'kana/vim-textobj-user'
-    Plug 'preservim/vim-textobj-quote'
-    Plug 'preservim/vim-textobj-sentence'
     Plug 'preservim/vim-litecorrect'
-
-    "Vim org
-    Plug 'jceb/vim-orgmode'
-    Plug 'mattn/calendar-vim'
-    Plug 'yegappan/taglist'
-    Plug 'vim-scripts/utl.vim'
-    Plug 'preservim/tagbar'
-    Plug 'universal-ctags/ctags'
-    Plug 'tpope/vim-speeddating'
 call plug#end()
 
 set termguicolors
@@ -42,22 +36,30 @@ let ayucolor="darker"
 colorscheme ayu
 let mapleader = " "
 
-"Remaps
 
-nnoremap <leader>pv :Vex<CR>
+" Binds
+
 nnoremap <leader><CR> :so ~/.vimrc<CR>
-nnoremap <leader>fg :GFiles<CR>
-nnoremap <leader>ff :Files<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
+nnoremap <leader>ba :Buffers<CR>
+nnoremap <leader>bk :bd<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>pv :Vex<CR>
+nnoremap <leader>sc :set spell! spelllang=en_us<CR>
 nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
 
-let g:pickachu_default_date_format = "%Y-%m-%d %a %H:%M"
-
+" Initialize plugins
 augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd,text call pencil#init()
-                            \ | call lexical#init()
-                            \ | call textobj#quote#init()
-                            \ | call textobj#sentence#init()
-                            \ | call litecorrect#init()
+    autocmd!
+    autocmd FileType markdown,mkd,text call pencil#init({'wrap': 'soft'})
+                                    \| call litecorrect#init()
 augroup END
+
+" Abbreviations
+iabbrev @@ james@jamesteitsworth.com
+iabbrev d Danny
+
+"iabbrev <expr> ddd strftime('%Y-%m-%d %a %H:%M')
