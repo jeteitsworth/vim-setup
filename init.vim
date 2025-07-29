@@ -12,6 +12,10 @@ set history=100
 
 "Plugins
 call plug#begin('~/.vim/plugged')
+    " FZF
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf.vim'
+	
     "Theme
     Plug 'k4yt3x/ayu-vim-darker'
 
@@ -41,6 +45,8 @@ let mapleader = " "
 
 "Remaps
 
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>pv :Vex<CR>
 nnoremap <leader><CR> :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>\ :Iawriter<CR>:set background=dark<CR>
@@ -64,11 +70,6 @@ EOF
 " Setup Org Bullets
 lua << EOF
 require('org-bullets').setup()
-EOF
-
-" Setup Org Telescope
-lua << EOF
-require('telescope').load_extension('orgmode')
 EOF
 
 " Setup Vimwiki
