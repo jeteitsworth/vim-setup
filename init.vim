@@ -59,6 +59,8 @@ inoremap ? ?<c-g>u
 inoremap ! !<c-g>u
 inoremap , ,<c-g>u
 
+nnoremap <leader>z g<C-g>:<C-U>echo v:statusmsg<CR>
+
 " Org setup
 lua << EOF
 require('orgmode').setup({
